@@ -14,8 +14,8 @@ module Spree
       indexes :description, analyzer: 'snowball'
       indexes :available_on, type: 'date', format: 'dateOptionalTime', include_in_all: false
       indexes :price, type: 'double'
-      indexes :sku, type: 'string', index: 'not_analyzed',
-      indexes :mpn, type: 'string', index: 'not_analyzed',
+      indexes :sku, type: 'string', index: 'not_analyzed'
+      indexes :mpn, type: 'string', index: 'not_analyzed'
       indexes :taxon_ids, type: 'string', index: 'not_analyzed'
       indexes :properties, type: 'string', index: 'not_analyzed'
     end
