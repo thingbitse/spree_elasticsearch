@@ -14,8 +14,8 @@ module Spree
       indexes :description, analyzer: 'snowball'
       indexes :available_on, type: 'date', format: 'dateOptionalTime', include_in_all: false
       indexes :price, type: 'double'
-      indexes :sku, type: 'string', index: 'not_analyzed'
-      indexes :mpn, type: 'string', index: 'not_analyzed'
+      indexes :sku, type: 'string', analyzer: 'edgeNGram_analyzer', boost: 50
+      indexes :mpn, type: 'string', analyzer: 'edgeNGram_analyzer', boost: 50
       indexes :taxon_ids, type: 'string', index: 'not_analyzed'
       indexes :properties, type: 'string', index: 'not_analyzed'
     end
@@ -87,7 +87,7 @@ module Spree
         unless query.blank? # nil or empty
           q = { query_string: { 
                 query: query,
-                fields: ['name^10','description','sku', 'mpn', 'variants.sku', 'variant.*', 'name.*^.1'],
+                fields: ['name^10','description','sku', 'mpn', 'variants.sku', 'variants.mpn', 'variant.*', 'name.*^.1'],
                 default_operator: 'AND',
                 use_dis_max: true 
                 } 
